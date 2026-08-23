@@ -10,7 +10,8 @@ public class Main {
         String Sueldo = null;
         int numeroTelefono = 0;
         boolean existenRegistro = false;              // se inicia con exitenRegistro = false para  indicar que no se ha creado un usuario
-        do{
+        do{                                          /*  Do ejecutara el bloque por lo menos 1 vez siempre y cuando la "opcion" no sea 5, asi el 
+                                                      menu aparecera luego de cada accion */
             //Creacion de menu unicamente visual
             System.out.println("///////////////////////////////");
          System.out.println("______________");
