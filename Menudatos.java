@@ -1,26 +1,10 @@
 import java.util.Scanner;
-
 public class Menudatos {
-    // guardar el nombre de cada empleado (capacidad máxima: 100)
-    public static String[] nombre = new String[100];
-
-    //guardar el sueldo de cada empleado (mismo índice que 'nombre')
-    public static float[] sueldo = new float[100];
-
-    //guardar el cargo de cada empleado (mismo índice que 'nombre')
-    public static String[] cargo = new String[100];
+    public static String[] nombre = new String[100];    // guardar el nombre de cada empleado (capacidad máxima: 100)
+    public static float[] sueldo = new float[100];  //guardar el sueldo de cada empleado (mismo índice que 'nombre')
+    public static String[] cargo = new String[100]; //guardar el cargo de cada empleado (mismo índice que 'nombre')
     public static int contador = 0;
-
-    // Scanner ÚNICO para todo el programa. Es una variable de clase (static)
-    // para que todos los métodos usen el mismo objeto y así lean del mismo
-    // flujo de entrada sin conflictos.
-    // IMPORTANTE: nunca se debe crear otro "new Scanner(System.in)" dentro
-    // de otro método, porque abrir varios Scanners sobre System.in puede
-    // causar comportamientos inesperados al leer datos.
     public static Scanner entrada = new Scanner(System.in);
-
-
-    // ------------------- PROGRAMA PRINCIPAL -------------------
 
     /**
      * Punto de entrada del programa. Muestra el menú repetidamente
@@ -29,17 +13,9 @@ public class Menudatos {
     public static void main(String[] args) {
         int opcion; // Guarda la opción elegida por el usuario en cada vuelta del menú
 
-        // do-while porque queremos que el menú se muestre AL MENOS una vez,
-        // sin importar qué. Con un "while" normal habría que duplicar código.
         do {
-            encabezado();       // Imprime el título decorativo
-            // Le pasamos el texto de las opciones y la cantidad de opciones válidas (5)
-            opcion = menu("1- Crear\n2- Ver\n3- Editar\n4- Borrar\n5- Salir", 5);
-
-            // El switch decide qué método ejecutar según la opción.
-            // Cada "case" termina con "break" para que no se sigan ejecutando
-            // los casos siguientes por accidente (esto se llama "fall-through"
-            // y es un error muy común si se olvida el break).
+            encabezado();           
+            opcion = menu("1- Crear\n2- Ver\n3- Editar\n4- Borrar\n5- Salir", 5); // Se pasamos el texto de las opciones y la cantidad de opciones válidas (5)
             switch (opcion) {
                 case 1:
                     menuCrear();   // Registrar uno o varios empleados nuevos
@@ -65,7 +41,7 @@ public class Menudatos {
         entrada.close();
     }
 
-    /* Imprime un encabezado decorativo. Solo es estético,
+    /* Imprime un encabezado decorativo. Solo es imagen
       no afecta la lógica del programa.     */
     public static void encabezado() {
         System.out.println("\n---------------------------");
