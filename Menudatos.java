@@ -6,10 +6,6 @@ public class Menudatos {
     public static int contador = 0;
     public static Scanner entrada = new Scanner(System.in);
 
-    /**
-     * Punto de entrada del programa. Muestra el menú repetidamente
-     * hasta que el usuario elija la opción 5 (Terminar).
-     */
     public static void main(String[] args) {
         int opcion; // Guarda la opción elegida por el usuario en cada vuelta del menú
 
@@ -33,8 +29,8 @@ public class Menudatos {
                     System.out.println("\n¡Gracias por utilizar el programa!");
                     break;
                 default:
-                    // Si el usuario ingresa un número fuera del 1-5
-                    // (por ejemplo 8 o -1), caemos aquí.
+                    // Si el usuario ingresa un número fuera del 1-5  se mostrara lo siguiente
+                   
                     System.out.println("\nOpción inválida, intente de nuevo.");
             }
         } while (opcion != 5); // Repetimos el menú mientras no se elija "Terminar"
@@ -53,21 +49,16 @@ public class Menudatos {
         System.out.println(opciones);
         System.out.print("Seleccione una opción: ");
 
-        // hasNextInt() revisa si lo próximo que el usuario escribió
-        // es un número entero, SIN consumirlo todavía.
-        // Si escribió letras, entramos al while y le pedimos de nuevo.
+/*Se revisa si lo escrito es un numero entero, de no serlo se volvera a pedir que ingrese una opcion, luego se leera 
+de ser un numero fuera del rango se volvera a pedir que ingrese un numer*/
         while (!entrada.hasNextInt()) {
             System.out.println("Por favor ingrese un número válido.");
-            entrada.next(); // descartamos lo que escribió mal (ej: "hola")
+            entrada.next();
             System.out.print("Seleccione una opción: ");
         }
 
-        int opcion = entrada.nextInt(); // ahora sí leemos el número
+        int opcion = entrada.nextInt(); 
         entrada.nextLine(); 
-
-        // Validamos también que el número esté dentro del rango permitido
-        // (1 a cantidadOpciones). Si el usuario ingresa, por ejemplo, 9,
-        // no lo dejamos pasar: se lo volvemos a pedir.
         while (opcion < 1 || opcion > cantidadOpciones) {
             System.out.println("Opción fuera de rango. Intente de nuevo.");
             System.out.println(opciones);
@@ -128,9 +119,6 @@ public class Menudatos {
         System.out.println("\n-> " + cantidad + " empleado(s) registrado(s) con éxito.");
     }
 
-
-    // ------------------- VER (Read) -------------------
-
     /**
      * Recorre todos los empleados registrados (desde la posición 0
      * hasta contador-1) y muestra sus datos usando verDatos().
@@ -148,22 +136,13 @@ public class Menudatos {
         }
     }
 
-
-    // ------------------- EDITAR (Update) -------------------
-
-    /**
-     * Permite modificar los datos de un empleado ya existente.
-     * Primero muestra la lista completa (para que el usuario vea
-     * qué posición corresponde a quién) y luego pide el índice
-     * a editar.
-     */
     public static void menuEditar() {
         if (contador == 0) {
             System.out.println("\nNo hay empleados para actualizar.");
             return;
         }
 
-        menuVer(); // mostramos la lista para que el usuario elija con seguridad
+        menuVer(); // mostramos la lista para que el usuario elija 
 
         System.out.print("\nIngrese la posición/ID del empleado a modificar (0 a " + (contador - 1) + "): ");
         if (!entrada.hasNextInt()) {
@@ -174,9 +153,6 @@ public class Menudatos {
         int index = entrada.nextInt();
         entrada.nextLine();
 
-        // Validamos que el índice esté dentro del rango de empleados
-        // realmente registrados (no del tamaño total del array, que es 100,
-        // sino de 'contador', que es cuántos hay de verdad).
         if (index >= 0 && index < contador) {
             System.out.println("\nDatos actuales:");
             verDatos(index);
@@ -187,23 +163,6 @@ public class Menudatos {
             System.out.println("Posición fuera de rango.");
         }
     }
-
-
-    // ------------------- BORRAR (Delete) -------------------
-
-    /**
-     * Elimina un empleado de la lista. Como los arrays no pueden
-     * "encoger" en Java, lo que hacemos es DESPLAZAR todos los
-     * empleados que están después del eliminado, una posición
-     * hacia la izquierda, para cerrar el hueco. Al final,
-     * reducimos 'contador' en 1.
-     *
-     * Ejemplo con 4 empleados (posiciones 0,1,2,3) si borramos el 1:
-     *   Antes:   [Ana, Luis, Marta, Pedro]
-     *   Pasamos Marta a la posición 1, Pedro a la posición 2
-     *   Después: [Ana, Marta, Pedro, (vacío)]
-     *   contador pasa de 4 a 3
-     */
     public static void menuBorrar() {
         if (contador == 0) {
             System.out.println("\nNo hay empleados registrados para eliminar.");
@@ -236,22 +195,13 @@ public class Menudatos {
             cargo[contador - 1] = null;
             sueldo[contador - 1] = 0;
 
-            contador--; // ahora hay un empleado menos
+            contador--; 
             System.out.println("-> Empleado eliminado correctamente.");
         } else {
             System.out.println("Posición fuera de rango.");
         }
     }
 
-
-    // ------------------- MÉTODOS DE APOYO (helpers) -------------------
-
-    /**
-     * Imprime en pantalla los datos (nombre, cargo, sueldo) del
-     * empleado ubicado en la posición 'nroEmpleado'.
-     *
-     * @param nroEmpleado índice del empleado dentro de los arrays
-     */
     public static void verDatos(int nroEmpleado) {
         System.out.println("Nombre del empleado: " + nombre[nroEmpleado]);
         System.out.println("Cargo del empleado: " + cargo[nroEmpleado]);
@@ -275,6 +225,6 @@ public class Menudatos {
             entrada.next(); // descartamos el valor inválido
         }
         sueldo[nroEmpleado] = entrada.nextFloat();
-        entrada.nextLine(); // limpiamos el "Enter" pendiente, como en los otros métodos
+        entrada.nextLine();
     }
 }
